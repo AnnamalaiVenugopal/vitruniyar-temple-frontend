@@ -11,7 +11,8 @@ const ArchanaTicketBooking = () => {
     const [bookingDate, setBookingDate] = useState('');
     const [bookingTime, setBookingTime] = useState('');
     const[isResponseLoaded, setResponseLoaded] = useState(true);
-
+    const [startDate, setStartDate] = useState(new Date().getFullYear() +'-'+(new Date().getMonth() < 9 ? '0'+(new Date().getMonth()+1):(new Date().getMonth()+1))+'-'+new Date().getDate());
+    
     const bookTicket = (event) => {
         event.preventDefault();
         setResponseLoaded(false);
@@ -148,6 +149,7 @@ const ArchanaTicketBooking = () => {
             </div>
             <div className='col-sm-8'>
                 <input className='form-control' type='email'  id='emailid' placeholder='Email Id' value={emailId} onChange={handleEmailIdChange}/>
+                
             </div>
         </div>
         <div className={isValidEmail(emailId) ? 'hide' : 'warning'}>Enter a valid Email Id</div>
@@ -156,7 +158,7 @@ const ArchanaTicketBooking = () => {
                 Booking Date : 
             </div>
             <div className='col-sm-4'>
-                <input type='date' className='form-control' value={bookingDate} onChange={handleBookingDateChange} onKeyDown={(e) => e.preventDefault()}/>
+                <input type='date' className='form-control' value={bookingDate} onChange={handleBookingDateChange} onKeyDown={(e) => e.preventDefault()} min={startDate}/>
             </div>
         </div>
         <div className='form-group row'>
